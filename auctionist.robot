@@ -180,7 +180,8 @@ Login
   Run Keyword If  ${is_events_visible}  Run Keywords
   ...  Дочекатися Анімації  xpath=//button[contains(@id,"-read-all")]
   ...  AND  Click Element  xpath=//button[contains(@id,"-read-all")]
-  Click Element  id=more-filter
+  ...  AND  Дочекатися Анімації  xpath=//button[contains(@id,"-read-all")]
+  Дочекатися І Клікнути  id=more-filter
   Дочекатися Анімації  id=tenderssearch-tender_cbd_id
   Wait Until Element Is Visible  name=TendersSearch[tender_cbd_id]  10
   Input text  name=TendersSearch[tender_cbd_id]  ${tender_uaid}
@@ -511,8 +512,10 @@ Login
   ...  Wait Until Keyword Succeeds  10 x  60 s  Звірити статус тендера  ${username}  ${tender_uaid}  active.qualification
   Перейти на сторінку кваліфікації учасників  ${username}  ${tender_uaid}
   Click Element  xpath=//*[contains(@id,"modal-verification")]
+  Дочекатися Анімації  name=protokol_ok
   Choose File  xpath=//*[@id="verification-form-upload-file"]/descendant::input[@type="file"]  ${filepath}
   Click Element  name=protokol_ok
+  Дочекатися Анімації  name=protokol_ok
   Wait Until Element Is Visible  xpath=//div[contains(@class,'alert-success')]
   Wait Until Keyword Succeeds  10 x  30 s  Run Keywords
   ...  Reload Page

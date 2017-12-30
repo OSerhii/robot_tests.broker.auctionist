@@ -177,8 +177,6 @@ Login
 Пошук тендера по ідентифікатору
   [Arguments]  ${username}  ${tender_uaid}
   Switch Browser  ${my_alias}\
-#  Go To  http://${host}/tenders/index
-#  Sleep  3
   ${is_events_visible}=  Run Keyword And Return Status  Element Should Be Visible  xpath=//*[@id="events"]/descendant::*[@class="close"]
   Run Keyword If  ${is_events_visible}  Run Keywords
   ...  Дочекатися Анімації  xpath=//*[@id="events"]/descendant::*[@class="close"]
@@ -451,13 +449,16 @@ Login
   [Arguments]  ${username}  ${tender_uaid}  ${lot_id}=${Empty}
   Switch Browser  ${my_alias}
   auctionist.Пошук тендера по ідентифікатору   ${username}  ${tender_uaid}
-  ${auction_url}  Get Element Attribute  xpath=(//a[contains(@href, "openprocurement.org/auction")])[1]@href
+  ${auction_url}=  Get Element Attribute  xpath=(//a[contains(text(), "Перейти в аукціон")])[1]@href
   [return]  ${auction_url}
 
 Отримати посилання на аукціон для учасника
   [Arguments]  ${username}  ${tender_uaid}  ${lot_id}=${Empty}
   Switch Browser  ${my_alias}
   auctionist.Пошук тендера по ідентифікатору   ${username}  ${tender_uaid}
+  Wait Until Keyword Succeeds  15 x  60 s  Run Keywords
+  ...  Click Element  xpath=//*[contains(@href, "tender/json/")]
+  ...  AND  Element Should Be Visible  xpath=//a[@class="auction_seller_url"]
   ${current_url}=  Get Location
   Execute Javascript  window['url'] = null; $.get( "http://${host}/seller/tender/updatebid", { id: "${current_url.split("/")[-1]}"}, function(data){ window['url'] = data.data.participationUrl },'json');
   Wait Until Keyword Succeeds  20 x  1 s  JQuery Ajax Should Complete

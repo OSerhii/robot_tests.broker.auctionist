@@ -176,7 +176,8 @@ Login
 
 Пошук тендера по ідентифікатору
   [Arguments]  ${username}  ${tender_uaid}
-  Switch Browser  ${my_alias}\
+  Switch Browser  ${my_alias}
+  Reload Page
   ${is_events_visible}=  Run Keyword And Return Status  Element Should Be Visible  xpath=//*[@id="events"]/descendant::*[@class="close"]
   Run Keyword If  ${is_events_visible}  Run Keywords
   ...  Дочекатися Анімації  xpath=//*[@id="events"]/descendant::*[@class="close"]
@@ -521,8 +522,7 @@ Login
   Дочекатися Анімації  name=protokol_ok
   Choose File  xpath=//*[@id="verification-form-upload-file"]/descendant::input[@type="file"]  ${filepath}
   Click Element  name=protokol_ok
-  Дочекатися Анімації  name=protokol_ok
-  Wait Until Element Is Visible  xpath=//div[contains(@class,'alert-success')]
+  Wait Until Keyword Succeeds  10 x  400 ms  Element Should Be Visible  xpath=//div[contains(@class,'alert-success')]
   Wait Until Keyword Succeeds  10 x  30 s  Run Keywords
   ...  Reload Page
   ...  AND  Element Should Not Be Visible  xpath=//button[@onclick="window.location.reload();"]

@@ -38,7 +38,7 @@ def convert_string_from_dict_auctionist(string):
         u'квалiфiкацiя переможця': u'active.qualification',
         u'торги не відбулися': u'unsuccessful',
         u'продаж завершений': u'complete',
-        u'торги відмінено': u'cancelled',
+        u'торги скасовано': u'cancelled',
         u'торги були відмінені.': u'active',
         u'Юридична Інформація про Майданчики': u'x_dgfPlatformLegalDetails',
         u'Презентація': u'x_presentation',

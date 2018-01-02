@@ -178,6 +178,7 @@ Login
   [Arguments]  ${username}  ${tender_uaid}
   Switch Browser  ${my_alias}
   Reload Page
+  Wait Until Element Is Not Visible  xpath=//div[@class="modal-backdrop fade"]  10
   ${is_events_visible}=  Run Keyword And Return Status  Element Should Be Visible  xpath=//*[@id="events"]/descendant::*[@class="close"]
   Run Keyword If  ${is_events_visible}  Run Keywords
   ...  Дочекатися Анімації  xpath=//*[@id="events"]/descendant::*[@class="close"]

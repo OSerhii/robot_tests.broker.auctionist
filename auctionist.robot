@@ -38,7 +38,9 @@ Login
   Wait Until Page Contains Element  id=loginform-username  10
   Input text  id=loginform-username  ${USERS.users['${username}'].login}
   Input text  id=loginform-password  ${USERS.users['${username}'].password}
-  Click Element  name=login-button
+  Wait Until Keyword Succeeds  5 x  400 ms  Run Keywords
+  ...  Click Element  name=login-button
+  ...  AND  Wait Until Keyword Succeeds  10 x  400 ms  Element Should Be Visible  xpath=//*[@class="h-acc-dropmenu"]
 
 ###############################################################################################################
 ######################################    СТВОРЕННЯ ТЕНДЕРУ    ################################################

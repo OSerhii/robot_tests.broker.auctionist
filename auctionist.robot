@@ -402,7 +402,7 @@ Login
   Click Element  xpath=//button[@name="delete_bids"]
   Wait Until Element Is Visible  xpath=//button[@data-bb-handler="confirm"]
   Click Element  xpath=//button[@data-bb-handler="confirm"]
-  Wait Until Element Is Visible  xpath=//input[contains(@name, '[value][amount]')]
+  Wait Until Keyword Succeeds  10 x  1 s  Element Should Be Visible  xpath=//input[contains(@name, '[value][amount]')]
 
 Змінити цінову пропозицію
   [Arguments]  ${username}  ${tender_uaid}  ${fieldname}  ${fieldvalue}

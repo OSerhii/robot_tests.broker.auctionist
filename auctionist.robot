@@ -377,7 +377,7 @@ Login
   Run Keyword If  '${MODE}' != 'dgfInsider'  ConvToStr And Input Text  xpath=//input[contains(@name, '[value][amount]')]  ${bid.data.value.amount}
   ...  ELSE  Scroll And Click  xpath=//input[@id="bid-participate"]/..
   Choose File  name=FileUpload[file][]  ${file_path}
-  Wait Until Keyword Succeeds  10 x  1 s  Element Should Be Visible  xpath=//input[@class="file_name" and contains(@value,"${file_path.split("/")[-1].split(".")[0]}")]
+  Wait Until Keyword Succeeds  10 x  1 s  Element Should Be Visible  xpath=(//input[@class="file_name"])[last()]
   Run Keyword If  '${MODE}' == 'dgfFinancialAssets'  Run Keywords
   ...  Scroll And Select From List By Value  xpath=(//*[contains(@name,'[documentType]')])[last()]  financialLicense
   ...  AND  Run Keyword And Ignore Error  Click Element  xpath=//*[@id="bid-checkforunlicensed"]/..

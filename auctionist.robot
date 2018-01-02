@@ -295,7 +295,7 @@ Login
   Run Keyword And Ignore Error  Click Element   xpath=//a[text()='Інформація про аукціон']
   Reload Page
   ${value}=  Run Keyword If  'cancellations' in '${field_name}'
-  ...  Get Text  xpath=//div[contains(@class,'alert-danger')]/h3[1]
+  ...  Get Element Attribute  //*[contains(text(), "Причина скасування")]@data-test-id-cancellation-status
   ...  ELSE  Get Text  xpath=//*[@data-test-id="${field_name.split('.')[-1]}"]
   [return]  ${value.lower()}
 

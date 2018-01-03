@@ -9,6 +9,7 @@ Library  auctionist_service.py
 *** Variables ***
 
 ${host}=  auctionist.byustudio.in.ua
+${acceleration}=  720
 
 *** Keywords ***
 
@@ -71,6 +72,7 @@ Login
   :FOR  ${index}  IN RANGE  ${number_of_items}
   \  Run Keyword If  ${index} != 0  Scroll And Click  xpath=(//button[@id="add-item"])[last()]
   \  Додати предмет  ${items[${index}]}  ${index}
+  Execute Javascript  $('#draft-submit').before('<input type="hidden" name="procurementMethodDetails" value="quick, accelerator=${acceleration}">');
   Scroll And Click  id=btn-submit-form
   Wait Until Page Contains Element  xpath=//*[@data-test-id="tenderID"]  10
   ${tender_uaid}=  Get Text  xpath=//*[@data-test-id="tenderID"]
@@ -279,6 +281,7 @@ Login
 Отримати інформацію із тендера
   [Arguments]  ${username}  ${tender_uaid}  ${field_name}
   ${red}=  Evaluate  "\\033[1;31m"
+  Click Element  xpath=//*[contains(@href, "tender/json/")]
   Run Keyword If  'title' in '${field_name}'  Execute Javascript  $("[data-test-id|='title']").css("text-transform", "unset")
   ${value}=  Run Keyword If
   ...  'awards' in '${field_name}'  Отримати інформацію про авард  ${username}  ${tender_uaid}  ${field_name}
